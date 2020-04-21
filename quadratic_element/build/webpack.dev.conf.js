@@ -29,7 +29,6 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       ],
     },
     hot: true,
-    disableHostCheck: true,// 解决域名访问本地运行地址时出现Invalid Host header的问题
     contentBase: false, // since we use CopyWebpackPlugin.
     compress: true,
     host: HOST || config.dev.host,
