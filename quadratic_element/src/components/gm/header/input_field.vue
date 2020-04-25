@@ -34,7 +34,7 @@
                 </el-select>
             </el-col>
             <el-col :span="5">
-                <font color="#909399" v-if="true">还在开发中！ 喵 o（＾∀＾）o !</font>
+                <font color="#909399" v-if="true">程序员正在加急开发中!</font>
                 <i class="el-icon-loading"></i>
             </el-col>
             <el-col :span="6"><el-input v-model="search_value" :placeholder="search_hint_placeholder"></el-input></el-col>
@@ -48,8 +48,8 @@
                 </div>
             </el-col>
             <el-col :span="1">
-                <div class="right" @click="setting_popup_frame_reveal_method('open')">
-                    <el-tooltip v-blink:visible="setting_hint_reveal" :content="setting_hint_content" class="item" effect="light" placement="right-end">
+                <div class="right" @click="method_setting_popup_frame_reveal('open')">
+                    <el-tooltip :disabled="setting_hint_reveal" :content="setting_hint_content" class="item" effect="light" placement="right-end">
                         <!-- <el-button round> -->
                             <i class="el-icon-setting"></i>
                         <!-- </el-button> -->
@@ -59,37 +59,60 @@
         </el-row>
 
         <!-- setting_popup_frame -->
-        <el-dialog title="设置" :visible.sync="setting_popup_frame_reveal">
-        <el-form v-model="setting_popup_frame_form" label-width="80px">
+        <el-dialog title="设置" :visible.sync="setting_popup_frame_reveal" destroy-on-close>
+        <el-form :model="setting_popup_frame_form" label-width="80px">
             <el-form-item label="设置按键提示文字是否显示" :label-width="formLabelWidth">
-                <el-select v-model="setting_popup_frame_form.setting_hint_reveal" placeholder="请选择">
-                    <el-option label="显示" value="false"></el-option>
-                    <el-option label="隐藏" value="true"></el-option>
-                </el-select>
+                <el-checkbox v-model="setting_popup_frame_form.setting_hint_reveal" border>
+                    <font v-if="setting_popup_frame_form.setting_hint_reveal">显示</font>
+                    <font v-if="!setting_popup_frame_form.setting_hint_reveal">隐藏</font>
+                </el-checkbox>
             </el-form-item>
             <el-form-item label="设置按键提示文字修改ㅤㅤ" :label-width="formLabelWidth">
                 <el-row :gutter="0">
-                    <el-col :span="14" :offset="6">
-                        <el-input type="text" v-model="setting_popup_frame_form.setting_hint_content" maxlength="20" show-word-limit width="50px" placeholder="请输入你想要的提示文字" clearable></el-input>
+                    <el-col :span="18" :offset="4">
+                        <el-input type="text" :disabled="!setting_popup_frame_form.setting_hint_reveal" v-model="setting_popup_frame_form.setting_hint_content" maxlength="20" show-word-limit width="50px" placeholder="请输入你想要的提示文字" clearable></el-input>
                     </el-col>
                 </el-row>
             </el-form-item>
             <el-form-item label="搜索按钮提示文字是否显示" :label-width="formLabelWidth">
-                <el-select v-model="setting_popup_frame_form.search_hint_reveal" placeholder="请选择">
-                    <el-option label="显示" value="false"></el-option>
-                    <el-option label="隐藏" value="true"></el-option>
-                </el-select>
+                <el-checkbox v-model="setting_popup_frame_form.search_hint_reveal" border>
+                    <font v-if="setting_popup_frame_form.search_hint_reveal">显示</font>
+                    <font v-if="!setting_popup_frame_form.search_hint_reveal">隐藏</font>
+                </el-checkbox>
             </el-form-item>
             <el-form-item label="搜索按钮提示文字修改ㅤㅤ" :label-width="formLabelWidth">
                 <el-row :gutter="0">
-                    <el-col :span="14" :offset="6">
-                        <el-input type="text" v-model="setting_popup_frame_form.search_hint_content" maxlength="20" show-word-limit width="50px" placeholder="请输入你想要的提示文字" clearable></el-input>
+                    <el-col :span="18" :offset="4">
+                        <el-input type="text" :disabled="!setting_popup_frame_form.search_hint_reveal" v-model="setting_popup_frame_form.search_hint_content" maxlength="20" show-word-limit width="50px" placeholder="请输入你想要的提示文字" clearable></el-input>
                     </el-col>
                 </el-row>
             </el-form-item>
+            <el-form-item label="搜索输入框提示文字修改ㅤ" :label-width="formLabelWidth">
+                <el-row :gutter="0">
+                    <el-col :span="18" :offset="4">
+                        <el-input type="text" v-model="setting_popup_frame_form.search_hint_placeholder" maxlength="25" show-word-limit width="50px" placeholder="请输入你想要的提示文字" clearable></el-input>
+                    </el-col>
+                </el-row>
+            </el-form-item>
+            <el-form-item label="图片大小提示文字是否显示" :label-width="formLabelWidth">
+                <el-checkbox v-model="setting_popup_frame_form.resolution_ratio_hint_reveal" border>
+                    <font v-if="setting_popup_frame_form.resolution_ratio_hint_reveal">显示</font>
+                    <font v-if="!setting_popup_frame_form.resolution_ratio_hint_reveal">隐藏</font>
+                </el-checkbox>
+            </el-form-item>
+            <el-form-item label="老婆提示文字是否显示" :label-width="formLabelWidth">
+                <el-checkbox v-model="setting_popup_frame_form.figure_hint_reveal" border>
+                    <font v-if="setting_popup_frame_form.figure_hint_reveal">显示</font>
+                    <font v-if="!setting_popup_frame_form.figure_hint_reveal">隐藏</font>
+                </el-checkbox>
+            </el-form-item>
         </el-form>
             <div slot="footer" class="dialog-footer">
-                <el-button @click="setting_popup_frame_reveal_method('abrogate')">取 消</el-button>
+                <el-button type="info" @click="empty_settings();empty_settings_hint()">清 空</el-button>
+                <el-button type="info" @click="default_settings();default_settings_hint()">默 认</el-button>
+            </div>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="method_setting_popup_frame_reveal('abrogate')">取 消</el-button>
                 <el-button type="primary" @click="setting_popup_frame_reveal_method('save')">确 定</el-button>
             </div>
         </el-dialog>
@@ -103,7 +126,7 @@ export default {
     name: 'input_field',
     data() {
         return {
-            /* 是否显示提示 */
+            /* 是否隐藏提示 */
             setting_hint_reveal: false, /* 设置按键 */
             search_hint_reveal: false, /* 搜索按键 */
             resolution_ratio_hint_reveal: false, /* 图片分辨率 */
@@ -121,6 +144,17 @@ export default {
             setting_popup_frame_reveal: false, /* 是否显示提示 */
             formLabelWidth: '200px',
             setting_popup_frame_form: {
+                setting_hint_reveal: '', /* 设置按键 */
+                search_hint_reveal: '', /* 查询按钮 */
+                resolution_ratio_hint_reveal: '', /* 图片分辨率 */
+                setting_hint_content: '', /* 设置按键 */
+                search_hint_content: '', /* 查询按钮 */
+                search_hint_placeholder: '',/* 查询输入框 */
+                resolution_ratio_hint_content: '', /* 图片分辨率 */
+                figure_hint_reveal: '' /* 指定人物 */
+            },
+            /* 中转数据 */
+            Transfer: {
                 setting_hint_reveal: '', /* 设置按键 */
                 setting_hint_content: '', /* 设置按键 */
                 search_hint_reveal: '', /* 查询按钮 */
@@ -179,32 +213,152 @@ export default {
             }, {
                 format: '8K',
                 size: '7680 X 4320'
-            }]
+            }],
+            /* 内置提示消息 */
+            internally_installed_message: { }
         }
     },
     methods: {
-        setting_popup_frame_reveal_method : function (directive) {
+        /* 同步数据获取 */
+        synchronization_acquire : function (){
+            /* 将当前按键值同步至中间值 */
+            this.Transfer.setting_hint_reveal = this.setting_hint_reveal, /* 设置按键 */
+            this.Transfer.search_hint_reveal = this.search_hint_reveal, /* 查询按钮 */
+            this.Transfer.figure_hint_reveal = this.figure_hint_reveal, /* 指定人物 */
+            this.Transfer.resolution_ratio_hint_reveal = this.resolution_ratio_hint_reveal, /* 图片分辨率 */
+            this.Transfer.setting_hint_content = this.setting_hint_content, /* 设置按键 */
+            this.Transfer.search_hint_content = this.search_hint_content, /* 查询按钮 */
+            this.Transfer.search_hint_placeholder = this.search_hint_placeholder, /* 查询输入框 */
+            this.Transfer.resolution_ratio_hint_content = this.resolution_ratio_hint_content/* 图片分辨率 */
+
+            /* 将当前中间值同步至设置弹框值 */
+            this.setting_popup_frame_form.setting_hint_reveal = !this.Transfer.setting_hint_reveal; /* 设置按键 */
+            this.setting_popup_frame_form.search_hint_reveal = !this.Transfer.search_hint_reveal, /* 查询按钮 */
+            this.setting_popup_frame_form.figure_hint_reveal = !this.Transfer.figure_hint_reveal, /* 指定人物 */
+            this.setting_popup_frame_form.resolution_ratio_hint_reveal = !this.Transfer.resolution_ratio_hint_reveal, /* 图片分辨率 */
+            this.setting_popup_frame_form.setting_hint_content = this.Transfer.setting_hint_content, /* 设置按键 */
+            this.setting_popup_frame_form.search_hint_content = this.Transfer.search_hint_content, /* 查询按钮 */
+            this.setting_popup_frame_form.search_hint_placeholder = this.Transfer.search_hint_placeholder, /* 查询输入框 */
+            this.setting_popup_frame_form.resolution_ratio_hint_content = this.Transfer.resolution_ratio_hint_content/* 图片分辨率 */
+        },
+        /* 同步数据传出 */
+        synchronization_outflow : function (){
+            this.setting_hint_reveal = this.Transfer.setting_hint_reveal, /* 设置按键 */
+            this.search_hint_reveal = this.Transfer.search_hint_reveal, /* 查询按钮 */
+            this.resolution_ratio_hint_reveal = this.Transfer.resolution_ratio_hint_reveal, /* 图片分辨率 */
+            this.figure_hint_reveal = this.Transfer.figure_hint_reveal, /* 指定人物 */
+            this.setting_hint_content = this.Transfer.setting_hint_content, /* 设置按键 */
+            this.search_hint_content = this.Transfer.search_hint_content, /* 查询按钮 */
+            this.search_hint_placeholder = this.Transfer.search_hint_placeholder, /* 查询输入框 */
+            this.resolution_ratio_hint_content = this.Transfer.resolution_ratio_hint_content /* 图片分辨率 */
+        },
+        /* 同步数据核对 */
+        synchronization_verify : function () {
+            /* 提示是否展示-核对数据 */
+            if(this.setting_popup_frame_form.setting_hint_reveal!=this.Transfer.setting_hint_reveal){
+                this.Transfer.setting_hint_reveal = this.setting_popup_frame_form.setting_hint_reveal;
+            }/* 设置按键 */
+
+            if(this.setting_popup_frame_form.search_hint_reveal!=this.Transfer.search_hint_reveal){
+                this.Transfer.search_hint_reveal = this.setting_popup_frame_form.search_hint_reveal;
+            }/* 查询按钮 */
+
+            if(this.setting_popup_frame_form.resolution_ratio_hint_reveal!=this.Transfer.resolution_ratio_hint_reveal){
+                this.Transfer.resolution_ratio_hint_reveal = this.setting_popup_frame_form.resolution_ratio_hint_reveal;
+            }/* 图片分辨率 */
+
+            if(this.setting_popup_frame_form.figure_hint_reveal!=this.Transfer.figure_hint_reveal){
+                this.Transfer.figure_hint_reveal = this.setting_popup_frame_form.figure_hint_reveal;
+            }/* 指定人物 */
+
+
+            /* 提示文字-核对数据*/
+            if(this.setting_popup_frame_form.setting_hint_content!=this.Transfer.setting_hint_content){
+                this.Transfer.setting_hint_content = this.setting_popup_frame_form.setting_hint_content;
+            }/* 设置按键 */
+
+            if(this.setting_popup_frame_form.search_hint_content!=this.Transfer.search_hint_content){
+                this.Transfer.search_hint_content = this.setting_popup_frame_form.search_hint_content;
+            }/* 查询按钮 */
+
+            if(this.setting_popup_frame_form.search_hint_placeholder!=this.Transfer.search_hint_placeholder){
+                this.Transfer.search_hint_placeholder = this.setting_popup_frame_form.search_hint_placeholder;
+            }/* 查询输入框 */
+
+            if(this.setting_popup_frame_form.resolution_ratio_hint_content!=this.Transfer.resolution_ratio_hint_content){
+                this.Transfer.resolution_ratio_hint_content = this.setting_popup_frame_form.resolution_ratio_hint_content;
+            }/* 图片分辨率 */
+        },
+        /* 恢复默认 - 后续从后台获取 */
+        default_settings : function () {
+            this.setting_hint_reveal= false, /* 设置按键 */
+            this.search_hint_reveal= false, /* 查询按钮 */
+            this.resolution_ratio_hint_reveal= false, /* 图片分辨率 */
+            this.figure_hint_reveal= false, /* 指定人物 */
+            this.setting_hint_content= '点我设置哦！ 喵 o（＾∀＾）o !', /* 设置按键 */
+            this.search_hint_content= '点我查询哦！ 喵 o（＾∀＾）o !', /* 查询按钮 */
+            this.search_hint_placeholder= '请不要输入特殊符号哦 ! 喵 o（＾∀＾）o !', /* 查询输入框 */
+            this.resolution_ratio_hint_content= '点我！ 喵 o（＾∀＾）o !' /* 图片分辨率 */
+            this.synchronization_acquire();
+        },
+        empty_settings : function () {
+            this.setting_popup_frame_form.setting_hint_reveal = false; /* 设置按键 */
+            this.setting_popup_frame_form.search_hint_reveal = false, /* 查询按钮 */
+            this.setting_popup_frame_form.figure_hint_reveal = false, /* 指定人物 */
+            this.setting_popup_frame_form.resolution_ratio_hint_reveal = false, /* 图片分辨率 */
+            this.setting_popup_frame_form.setting_hint_content = '', /* 设置按键 */
+            this.setting_popup_frame_form.search_hint_content = '', /* 查询按钮 */
+            this.setting_popup_frame_form.search_hint_placeholder = '', /* 查询输入框 */
+            this.setting_popup_frame_form.resolution_ratio_hint_content = ''/* 图片分辨率 */
+        },
+        /* 数据纠正 */
+        data_redress : function () {
+            this.setting_popup_frame_form.setting_hint_reveal = !this.setting_popup_frame_form.setting_hint_reveal; /* 设置按键 */
+            this.setting_popup_frame_form.search_hint_reveal = !this.setting_popup_frame_form.search_hint_reveal, /* 查询按钮 */
+            this.setting_popup_frame_form.figure_hint_reveal = !this.setting_popup_frame_form.figure_hint_reveal, /* 指定人物 */
+            this.setting_popup_frame_form.resolution_ratio_hint_reveal = !this.setting_popup_frame_form.resolution_ratio_hint_reveal /* 图片分辨率 */
+        },
+        /* 系统设置弹窗 */
+        method_setting_popup_frame_reveal: function(directive){
             if(directive=="open"){
+                /* 同步数据 */
+                this.synchronization_acquire();
                 this.setting_popup_frame_reveal=true;
-            }else if(directive=="save"){
-                if(this.setting_popup_frame_form.setting_hint_reveal!=''){
-                    this.setting_hint_reveal = this.setting_popup_frame_form.setting_hint_reveal;
-                }
-                if(this.setting_popup_frame_form.setting_hint_content!=''){
-                    this.setting_hint_content = this.setting_popup_frame_form.setting_hint_content;
-                }
-                if(this.setting_popup_frame_form.search_hint_reveal!=''){
-                    this.search_hint_reveal = this.setting_popup_frame_form.search_hint_reveal;
-                }
-                if(this.setting_popup_frame_form.search_hint_content!=''){
-                    this.search_hint_content = this.setting_popup_frame_form.search_hint_content;
-                }
-                this.setting_popup_frame_reveal=false;
-                // this.setting_hint_reveal = this.setting_popup_frame_form;
-                // this.setting_hint_reveal = this.setting_popup_frame_form;
             }else if(directive=="abrogate"){
                 this.setting_popup_frame_reveal=false;
             }
+        },
+        setting_popup_frame_reveal_method : function (directive) {
+            if(directive=="save"){
+                /* 数据纠正 */
+                this.data_redress();
+                /* 数据核对 */
+                this.synchronization_verify();
+                /* 将设置中的数据同步 */
+                this.synchronization_outflow();
+            }
+            this.setting_popup_frame_reveal=false;
+        },
+        /* 提示消息 */
+        open_message(close,msg,genre) {
+            this.$message({
+                showClose: close,
+                message: msg,
+                type: genre
+            });
+        },
+        /* 设置按键提示文字是否显示 提示 */
+        setting_decide_hint(msg,whether){
+            console.log('test');
+            if(!whether){
+                this.open_message(true,msg,);
+            }
+        },
+        default_settings_hint(){
+            this.open_message(true,'提示 设置已恢复默认!','success');
+        },
+        empty_settings_hint(){
+            this.open_message(true,'警告 设置已清空!','error');
         }
     }
 }

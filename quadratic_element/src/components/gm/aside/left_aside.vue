@@ -61,6 +61,8 @@
           <i class="el-icon-location"></i>
           <span slot="title">{{$t('m.fed.name')}}</span>
           </template>
+          <el-submenu index="5-1-1">
+            <template slot="title">{{$t('m.fed.basics.name')}}</template>
             <el-menu-item index="5-1-1" @click="redirect('HTML')">HTML</el-menu-item>
             <el-menu-item index="5-1-5" @click="redirect('XML')">XML</el-menu-item>
             <el-menu-item index="5-1-10" @click="redirect('JSP')">JSP</el-menu-item>
@@ -68,6 +70,7 @@
             <el-menu-item index="5-1-20" @click="redirect('CSS')">CSS</el-menu-item>
             <el-menu-item index="5-1-25" @click="redirect('CSS-3')">CSS 3</el-menu-item>
             <el-menu-item index="5-1-30" @click="redirect('JQuery')">JQuery</el-menu-item>
+          </el-submenu>
           <el-submenu index="5-5">
             <template slot="title">{{$t('m.fed.framework.name')}}</template>
             <el-submenu index="5-5-1">
