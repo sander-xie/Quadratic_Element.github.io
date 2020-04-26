@@ -8,7 +8,10 @@
       <!-- </el-aside> -->
       <el-container>
         <el-header><input_field /></el-header>
-        <el-main> <!-- <middle-iframe /> --> </el-main>
+        <el-main> 
+          <!-- <middle-iframe />  -->
+          <photo_gallery /> 
+        </el-main>
         <el-footer height="10%"> <bottom /> </el-footer>
       </el-container>
     </el-container>
@@ -32,6 +35,7 @@ export default {
     top: resolve => require(['@/components/gm/header/top'], resolve),
     input_field: resolve => require(['@/components/gm/header/input_field'], resolve),
     left_aside: resolve => require(["@/components/gm/aside/left_aside.vue"], resolve),
+    photo_gallery: resolve => require(["@/components/gm/body/photo_gallery.vue"], resolve),
     bottom: resolve => require(["@/components/gm/footer/bottom.vue"], resolve)
   }
 }

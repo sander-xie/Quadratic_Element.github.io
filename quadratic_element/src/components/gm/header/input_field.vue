@@ -108,8 +108,8 @@
             </el-form-item>
         </el-form>
             <div slot="footer" class="dialog-footer">
-                <el-button type="info" @click="empty_settings();empty_settings_hint()">清 空</el-button>
                 <el-button type="info" @click="default_settings();default_settings_hint()">默 认</el-button>
+                <el-button type="info" @click="empty_settings();empty_settings_hint()">清 空</el-button>
             </div>
             <div slot="footer" class="dialog-footer">
                 <el-button @click="method_setting_popup_frame_reveal('abrogate')">取 消</el-button>

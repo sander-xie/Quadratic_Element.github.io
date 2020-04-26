@@ -20,17 +20,28 @@
     </el-row>
     <el-dialog title="项目信息"
       :visible.sync="dialogVisible"
-      width="30%"
       :before-close="handleClose">
       <el-row>
         <el-col :span="6">项目名称：</el-col>
-        <el-col :span="18"><font class="xmxx-font-color">二次元壁纸分享 | quadratic_element</font></el-col>
-        <el-col :span="24">
-          <font>当前项目进度:</font>
+        <el-col :span="18"><font class="xmxx-font-color">二次元壁纸分享ㅤ|ㅤquadratic_element</font></el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="6">版本信息：</el-col>
+        <el-col :offset="18"></el-col>
+        <el-col :span="12">当前状态：<font class="xmxx-font-color">内部开发中</font></el-col>
+        <el-col :span="12">版本号：<font class="xmxx-font-color">0.0.0.1</font></el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="6">
+          <font>项目进度：</font>
+        </el-col>
+        <el-col :offset="4" :span="20">
           <el-progress :percentage="1"></el-progress>
         </el-col>
+      </el-row>
+      <el-row>
         <el-col :span="24">
-          <font>您对我们的评价:</font>
+          <font>您对我的评价：</font>
           <div class="transition-box"><el-rate v-model="value" show-text></el-rate></div>
         </el-col>
       </el-row>
@@ -49,7 +60,7 @@ export default {
     data() {
       return {
         dialogVisible: false,
-        value: ''
+        value: null
       };
     },
     methods: {

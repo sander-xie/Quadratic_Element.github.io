@@ -48,8 +48,11 @@
             </el-menu-item-group>
           </el-submenu>
         </el-submenu>
+        <el-menu-item index="100">
+          <i class="el-icon-help"></i>
+          <span slot="title">帮助</span>
+        </el-menu-item>
     </el-menu>
-    <br /><br />
     <el-menu default-active="1-4-1" class="el-menu-vertical-demo" :collapse="isCollapse">
         <el-menu-item index="1" @click="isCollapse=!isCollapse">
           <i class="el-icon-s-unfold" v-if="isCollapse"></i>
@@ -82,6 +85,16 @@
               <template slot="title">{{$t('m.fed.framework.t_fe_s.name')}}</template>
               <el-menu-item index="5-5-5-1" @click="redirect('vue')">VUE</el-menu-item>
             </el-submenu>
+          </el-submenu>
+          <el-submenu index="5-10">
+            <template slot="title">
+              <span slot="title">{{$t('m.fed.development_tool.name')}}</span>
+            </template>
+            <el-menu-item-group>
+              <el-menu-item index="1-1-3-1" @click="redirect('HBuilder')">HBuilder</el-menu-item>
+              <el-menu-item index="1-1-3-2" @click="redirect('DW')">Adobe Dreamweaver</el-menu-item>
+              <el-menu-item index="1-1-3-3" @click="redirect('vs_code')">Visual Studio Code</el-menu-item>
+            </el-menu-item-group>
           </el-submenu>
         </el-submenu>
     </el-menu>
