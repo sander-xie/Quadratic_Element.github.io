@@ -64,18 +64,26 @@ export default {
             pictures_src: 'aaa',
             picture: {
                 id:'1', /* 图片ID */
-                /* 小窗口图片地址 */
-                path: 'https://konachan.net/sample/437c0af28e72530e12a3f4891695e189/Konachan.com%20-%20305542%20sample.jpg',
-                /* 图片下载链接 */
-                download_link: 'https://konachan.net/sample/437c0af28e72530e12a3f4891695e189/Konachan.com%20-%20305542%20sample.jpg',
+                /* 图片名称 */
+                image_name: '香风智乃',
+                /* 略缩图地址 */
+                path: '/static/Image_resources/wallpaper/quadratic_element-wallpaper-00001.jpg',
+                /* 下载图片名称 */
+                download_image_name: 'quadratic_element-wallpaper-00001.jpg',
+                /* 下载图片链接 */
+                download_image_link: '/static/Image_resources/wallpaper/quadratic_element-wallpaper-00001.jpg',
                 /* 全图查看链接 */
-                link_href: 'https://image.baidu.com/search/index?tn=baiduimage&ct=201326592&lm=-1&cl=2&ie=gb18030&word=%B6%FE%B4%CE%D4%AA-%B9%FA%C3%F1%C0%CF%C6%C5&fr=ala&ala=1&alatpl=adress&pos=0&hs=2&xthttps=111111',
+                wallpaper_link: '/static/Image_resources/wallpaper/quadratic_element-wallpaper-00001.jpg',
                 /* 图片预览 */
-                total_graph_link: 'https://konachan.net/sample/437c0af28e72530e12a3f4891695e189/Konachan.com%20-%20305542%20sample.jpg',
+                total_graph_link: '/static/Image_resources/wallpaper/quadratic_element-wallpaper-00001.jpg',
                 /* 加载失败提示 */
                 picture_outline_error: '啊咧! 加载失败了'
             }
         };
+    },
+    build: {
+        assetsPublicPath: '/',
+        assetsSubDirectory: 'static'
     },
     methods: {
         download : function (){
