@@ -59,7 +59,7 @@
         </el-row>
 
         <!-- setting_popup_frame -->
-        <el-dialog title="设置" :visible.sync="setting_popup_frame_reveal" destroy-on-close>
+        <el-dialog title="设置" top="25px" :visible.sync="setting_popup_frame_reveal" destroy-on-close>
         <el-form :model="setting_popup_frame_form" label-width="80px">
             <el-form-item label="设置按键提示文字是否显示" :label-width="formLabelWidth">
                 <el-checkbox v-model="setting_popup_frame_form.setting_hint_reveal" border>

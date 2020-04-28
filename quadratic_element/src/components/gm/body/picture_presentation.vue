@@ -1,46 +1,100 @@
 <template>
-    <div class="demo-image__preview" style="width: 100%; height: 100%">
-        <el-image style="width: 100%; height: 100%" :src="pictures.path">
+    <div class="demo-image__preview" style="width: 100%; height: 100%" >
+        <el-image style="width: 100%; height: 100%" :src="pictures.path" :href="pictures.wallpaper_link">
             <div slot="error" style="width: 100%; height: 100%" class="image-slot">
                 <i class="el-icon-picture-outline">{{pictures.picture_outline_error}}</i>
             </div>
         </el-image>
-        <div class="bottom clearfix" style="margin-top: 7px;">
+        <div class="bottom clearfix" style="margin-top: 11px;">
             <el-row :gutter="0">
-                <el-col :span="7" style="margin-left:4px;">
-                    <el-link type="primary" target="_blank" style="margin-top:12px;">
+                <el-col :span="3">
+                    <el-link type="primary" target="_blank" style="margin-top: 8px;">
                         <!-- 需同该网站ip或域名才能下载 -->
                         <a :href="pictures.download_image_link" style="color: #409EFF;" :download="pictures.download_image_name">
-                            <!-- <img src='/static/logo.png' class="img-circle" width="35px" style="" /> -->
                             <i class="el-icon-download"></i>
                         </a>
                     </el-link>
                 </el-col>
-                <el-col :span="7" :offset="1">
-                    <el-link type="primary" target="_blank" :underline="false" :href="pictures.wallpaper_link" style="margin-top:19px;">{{pictures.image_name}}</el-link>
+                <el-col :span="3" :offset="1">
+                    <el-link type="primary" target="_blank" :underline="false" style="margin-top: 8px;" v-clipboard:copy="pictures.share_link" v-clipboard:success="onCopy" v-clipboard:error="onError"><i class="el-icon-share"></i></el-link>
                 </el-col>
-                <el-col :span="7" :offset="1">
-                    <i style="margin-top:12px;" @click="Preview_DialogVisible=true" class="el-icon-view"></i>
+                <el-col :span="8" :offset="1" style="height: 25px">
+                    <el-link type="primary" target="_blank" :underline="false" style="margin-top: 14px;" :href="pictures.wallpaper_link"><font v-text="pictures.image_name"></font></el-link>
+                </el-col>
+                <el-col :span="3" :offset="1">
+                    <el-link type="primary" target="_blank" :underline="false" style="margin-top: 8px;" @click="Preview_DialogVisible=true;stop()"><i class="el-icon-view"></i></el-link>
+                </el-col>
+                <el-col :span="3" :offset="1">
+                    <el-link type="primary" target="_blank" :underline="false" style="margin-top: 8px;" @click="detailed_information_DialogVisible=true;"><i class="el-icon-warning-outline"></i></el-link>
                 </el-col>
             </el-row>
         </div>
 
-        <!-- style="margin-top: -73px;margin-left: -46px;margin-bottom: 25px;margin-right: -61px;" -->
+        <!-- 鼠标滚轮禁用 @mousewheel.prevent -->
         <el-dialog :title="pictures.image_name" top="25px" :visible.sync="Preview_DialogVisible" width="96%" center :fullscreen="false" :show-close="false" destroy-on-close>
-            <!-- <el-row style="width: 100%">
-                <el-col :offset="6" style="width: 50%">
-                </el-col>
-            </el-row> -->
-
-            <el-image fit="scale-down" style="width: 48%" :src="pictures.total_graph_link">
+            <el-image fit="scale-down" style="width: 53%" :src="pictures.total_graph_link">
                 <div slot="error" style="width: 100%; height: 100%" class="image-slot">
-                    <i class="el-icon-picture-outline">啊咧! 加载失败了</i>
+                    <i class="el-icon-picture-outline">{{pictures.picture_outline_error}}</i>
                 </div>
             </el-image>
-            
             <span slot="footer" class="dialog-footer">
-                <!-- <el-button @click="Preview_DialogVisible = false">取 消</el-button> -->
-                <!-- <el-button type="primary" @click="Preview_DialogVisible = false">确 定</el-button> -->
+                <el-button @click="Preview_DialogVisible = false">取 消</el-button>
+                <el-button type="primary" @click="Preview_DialogVisible = false">确 定</el-button>
+            </span>
+        </el-dialog>
+
+        <el-dialog :title="pictures.image_name" top="60px" :visible.sync="detailed_information_DialogVisible" width="46%" center :fullscreen="false" :show-close="false" destroy-on-close>
+            <el-row :gutter="0">
+                <el-col :span="24"><font>全 名</font></el-col>
+            </el-row>
+            <el-row :gutter="0">
+                <el-col :span="24"><font v-text="picture.detailed_information.full_name"></font></el-col>
+            </el-row>
+            <el-row :gutter="0">
+                <el-col :span="24"><font>昵 称</font></el-col>
+            </el-row>
+            <el-row :gutter="0">
+                <el-col :span="24"><font v-text="picture.detailed_information.nick_name"></font></el-col>
+            </el-row>
+            <el-row :gutter="0">
+                <el-col :span="24"><font>爱 称</font></el-col>
+            </el-row>
+            <el-row :gutter="0">
+                <el-col :span="24"><font v-text="picture.detailed_information.pet_name"></font></el-col>
+            </el-row>
+            <el-row :gutter="0">
+                <el-col :span="24"><font>番剧名称</font></el-col>
+            </el-row>
+            <el-row :gutter="0">
+                <el-col :span="24"><font v-text="picture.detailed_information.bangumi"></font></el-col>
+            </el-row>
+            <el-row :gutter="0">
+                <el-col :span="24"><font>图片提供人</font></el-col>
+            </el-row>
+            <el-row :gutter="0">
+                <el-col :span="24"><font v-text="picture.detailed_information.provide_people"></font></el-col>
+            </el-row>
+            <el-row :gutter="0">
+                <el-col :span="24"><font>图片提供方式</font></el-col>
+            </el-row>
+            <el-row :gutter="0">
+                <el-col :span="24"><font v-text="picture.detailed_information.ways_of_supply"></font></el-col>
+            </el-row>
+            <el-row :gutter="0">
+                <el-col :span="24"><font>图片来源</font></el-col>
+            </el-row>
+            <el-row :gutter="0">
+                <el-col :span="24"><font v-text="picture.detailed_information.source"></font></el-col>
+            </el-row>
+            <el-row :gutter="0">
+                <el-col :span="24"><font>图片来源链接</font></el-col>
+            </el-row>
+            <el-row :gutter="0">
+                <el-col :span="24"><font v-text="picture.detailed_information.source_link"></font></el-col>
+            </el-row>
+            <span slot="footer" class="dialog-footer">
+                <el-button @click="detailed_information_DialogVisible = false">取 消</el-button>
+                <el-button type="primary" @click="detailed_information_DialogVisible = false">确 定</el-button>
             </span>
         </el-dialog>
 
@@ -54,6 +108,7 @@ export default {
     data() {
         return {
             url: '',
+            detailed_information_DialogVisible: false,
             Preview_DialogVisible: false,
             pictures: this.picture
         }
@@ -63,7 +118,19 @@ export default {
         assetsSubDirectory: 'static'
     },
     methods: {
-
+        stop(){
+            var mo=function(e){e.preventDefault();};
+            document.body.style.overflow='hidden';
+            document.addEventListener("touchmove",mo,false);//禁止页面滑动
+        },
+        /* 复制成功时的回调函数 */
+        onCopy (e) {
+            this.$message.success("内容已复制到剪切板！")
+        },
+        /* 复制失败时的回调函数 */
+        onError (e) {
+            this.$message.error("抱歉，复制失败！")
+        }
     },
     /* 获取父组件传出值 */
     props:['picture'],
@@ -74,6 +141,9 @@ export default {
 </script>
 
 <style>
+/* .el-col{
+    border:1px solid red;
+} */
    /* 隐藏滚动条 */
    /* ::-webkit-scrollbar {
      width: 0 !important;

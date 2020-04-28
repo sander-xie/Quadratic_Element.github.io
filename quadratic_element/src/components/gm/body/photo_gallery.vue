@@ -66,18 +66,39 @@ export default {
                 id:'1', /* 图片ID */
                 /* 图片名称 */
                 image_name: '香风智乃',
+                /* 加载失败提示 */
+                picture_outline_error: '啊咧! 加载失败了',
                 /* 略缩图地址 */
                 path: '/static/Image_resources/wallpaper/quadratic_element-wallpaper-00001.jpg',
                 /* 下载图片名称 */
                 download_image_name: 'quadratic_element-wallpaper-00001.jpg',
                 /* 下载图片链接 */
                 download_image_link: '/static/Image_resources/wallpaper/quadratic_element-wallpaper-00001.jpg',
+                /* 分享图片链接 */
+                share_link: 'http://localhost:8884/static/Image_resources/wallpaper/quadratic_element-wallpaper-00001.jpg',
                 /* 全图查看链接 */
                 wallpaper_link: '/static/Image_resources/wallpaper/quadratic_element-wallpaper-00001.jpg',
                 /* 图片预览 */
                 total_graph_link: '/static/Image_resources/wallpaper/quadratic_element-wallpaper-00001.jpg',
-                /* 加载失败提示 */
-                picture_outline_error: '啊咧! 加载失败了'
+                /*  */
+                detailed_information: {
+                    /* 全名 */
+                    full_name : '香风智乃',
+                    /* 昵称 */
+                    nick_name: '智乃',
+                    /* 爱称 */
+                    pet_name: '智乃酱',
+                    /* 番剧名称 */
+                    bangumi: '请问您今天要来点兔子吗？',
+                    /* 图片提供人 */
+                    provide_people: 'this website author',
+                    /* 图片提供方式 */
+                    ways_of_supply: '后台上传',
+                    /* 图片来源 */
+                    source: 'K站',
+                    /* 图片来源链接 */
+                    source_link: 'http://konachan.wjcodes.com/'
+                }
             }
         };
     },
