@@ -43,54 +43,82 @@
             </span>
         </el-dialog>
 
-        <el-dialog :title="pictures.image_name" top="60px" :visible.sync="detailed_information_DialogVisible" width="46%" center :fullscreen="false" :show-close="false" destroy-on-close>
+        <el-dialog :title="pictures.image_name" top="60px" :visible.sync="detailed_information_DialogVisible" width="28%" center :fullscreen="false" :show-close="false" destroy-on-close>
             <el-row :gutter="0">
-                <el-col :span="24"><font>全 名</font></el-col>
+                <!-- <el-col :span="24"></el-col> -->
             </el-row>
             <el-row :gutter="0">
-                <el-col :span="24"><font v-text="picture.detailed_information.full_name"></font></el-col>
+                <el-col :span="21" :offset="3"><font>全 名</font></el-col>
             </el-row>
             <el-row :gutter="0">
-                <el-col :span="24"><font>昵 称</font></el-col>
+                <el-col :span="17" :offset="7"><font v-text="picture.detailed_information.full_name"></font></el-col>
             </el-row>
             <el-row :gutter="0">
-                <el-col :span="24"><font v-text="picture.detailed_information.nick_name"></font></el-col>
+                <!-- <el-col :span="24"></el-col> -->
             </el-row>
             <el-row :gutter="0">
-                <el-col :span="24"><font>爱 称</font></el-col>
+                <el-col :span="21" :offset="3"><font>昵 称</font></el-col>
             </el-row>
             <el-row :gutter="0">
-                <el-col :span="24"><font v-text="picture.detailed_information.pet_name"></font></el-col>
+                <el-col :span="17" :offset="7"><font v-text="picture.detailed_information.nick_name"></font></el-col>
             </el-row>
             <el-row :gutter="0">
-                <el-col :span="24"><font>番剧名称</font></el-col>
+                <!-- <el-col :span="24"></el-col> -->
             </el-row>
             <el-row :gutter="0">
-                <el-col :span="24"><font v-text="picture.detailed_information.bangumi"></font></el-col>
+                <el-col :span="21" :offset="3"><font>爱 称</font></el-col>
             </el-row>
             <el-row :gutter="0">
-                <el-col :span="24"><font>图片提供人</font></el-col>
+                <el-col :span="17" :offset="7"><font v-text="picture.detailed_information.pet_name"></font></el-col>
             </el-row>
             <el-row :gutter="0">
-                <el-col :span="24"><font v-text="picture.detailed_information.provide_people"></font></el-col>
+                <!-- <el-col :span="24"></el-col> -->
             </el-row>
             <el-row :gutter="0">
-                <el-col :span="24"><font>图片提供方式</font></el-col>
+                <el-col :span="21" :offset="3"><font>番剧名称</font></el-col>
             </el-row>
             <el-row :gutter="0">
-                <el-col :span="24"><font v-text="picture.detailed_information.ways_of_supply"></font></el-col>
+                <el-col :span="17" :offset="7"><font v-text="picture.detailed_information.bangumi"></font></el-col>
             </el-row>
             <el-row :gutter="0">
-                <el-col :span="24"><font>图片来源</font></el-col>
+                <!-- <el-col :span="24"></el-col> -->
             </el-row>
             <el-row :gutter="0">
-                <el-col :span="24"><font v-text="picture.detailed_information.source"></font></el-col>
+                <el-col :span="21" :offset="3"><font>图片提供人</font></el-col>
             </el-row>
             <el-row :gutter="0">
-                <el-col :span="24"><font>图片来源链接</font></el-col>
+                <el-col :span="17" :offset="7"><font v-text="picture.detailed_information.provide_people"></font></el-col>
             </el-row>
             <el-row :gutter="0">
-                <el-col :span="24"><font v-text="picture.detailed_information.source_link"></font></el-col>
+                <!-- <el-col :span="24"></el-col> -->
+            </el-row>
+            <el-row :gutter="0">
+                <el-col :span="21" :offset="3"><font>图片提供方式</font></el-col>
+            </el-row>
+            <el-row :gutter="0">
+                <el-col :span="17" :offset="7"><font v-text="picture.detailed_information.ways_of_supply"></font></el-col>
+            </el-row>
+            <el-row :gutter="0">
+                <!-- <el-col :span="24"></el-col> -->
+            </el-row>
+            <el-row :gutter="0">
+                <el-col :span="21" :offset="3"><font>图片来源</font></el-col>
+            </el-row>
+            <el-row :gutter="0">
+                <el-col :span="17" :offset="7"><font v-text="picture.detailed_information.source"></font></el-col>
+            </el-row>
+            <el-row :gutter="0">
+                <!-- <el-col :span="24"></el-col> -->
+            </el-row>
+            <el-row :gutter="0">
+                <el-col :span="21" :offset="3"><font>图片来源链接</font></el-col>
+            </el-row>
+            <el-row :gutter="0">
+                <el-col :span="17" :offset="7">
+                    <el-link type="primary" target="_blank" :underline="false" :href="pictures.detailed_information.source_link">
+                        <font v-text="picture.detailed_information.source_link"></font>
+                    </el-link>
+                </el-col>
             </el-row>
             <span slot="footer" class="dialog-footer">
                 <el-button @click="detailed_information_DialogVisible = false">取 消</el-button>
@@ -102,7 +130,6 @@
 </template>
 
 <script>
-
 export default {
     name:'picture_presentation',
     data() {
@@ -135,14 +162,15 @@ export default {
     /* 获取父组件传出值 */
     props:['picture'],
     created: function () {
-
     }
 }
 </script>
 
-<style>
+<style scoped>
+
 /* .el-col{
     border:1px solid red;
+    text-align: center;
 } */
    /* 隐藏滚动条 */
    /* ::-webkit-scrollbar {
