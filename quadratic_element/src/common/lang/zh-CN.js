@@ -1,6 +1,6 @@
 export const m = {
     /** 标题 */
-    title: "pim",
+    title: "quadratic_element",
     /**top.vue */
     /* 前端开发 */
     fed: {
@@ -42,6 +42,7 @@ export const m = {
     /* 后端开发 */
     bed: {
         name: '后端开发',
+        /* 基础 */
         basics: {
             name: '基础',
             c: 'C',
@@ -51,6 +52,7 @@ export const m = {
             java: 'JAVA',
             dos: 'DOS Command'
         },
+        /* 框架 */
         framework: {
             name: '框架',
             maven: 'Maven',
@@ -61,6 +63,7 @@ export const m = {
             spring_mvc: 'Spring MVC',
             spring_boot: 'Spring Boot'
         },
+        /* 系统 */
         system: {
             name: '系统',
             linux: 'Linux',
@@ -70,6 +73,7 @@ export const m = {
             win8: 'Windows 8',
             win10: 'Windows 10'
         },
+        /* 数据库 */
         database: {
             name: '数据库',
             sql: {
@@ -89,9 +93,11 @@ export const m = {
                 name: '开发工具'
             }
         },
+        /* 开发工具 */
         development_tool: {
             name: '开发工具'
         },
+        /* 第三方接口 */
         t_p_o_i: {
             name: '第三方接口',
             map: '地图',
@@ -103,19 +109,31 @@ export const m = {
             sms: '短信'
         }
     },
-    /* Quadratic Element */
-    q_e: {
-        name: '二次元',
-        a: 'A 站',
-        b: 'B 站',
-        c: 'C 站',
-        d: 'D 站',
-        e: 'E 站',
-        f: 'F 站',
-        g: 'G 站',
-        m: 'M 站',
-        k: 'K 站',
-        p: 'P 站'
+    /* 导航 */
+    navigation: {
+        /* 在线观看番剧 */
+        online_watching_bangumi: {
+            name: '在线观看番剧'
+        },
+        /* 在线观看漫画 */
+        online_watching_caricature: {
+            name: '在线观看漫画'
+        },
+        /* 二次元 Quadratic Element */
+        q_e: {
+            name: '二次元',
+            a: 'A 站',
+            b: 'B 站',
+            c: 'C 站',
+            d: 'D 站',
+            e: 'E 站',
+            f: 'F 站',
+            g: 'G 站',
+            m: 'M 站',
+            k: 'K 站',
+            p: 'P 站[需vpn]',
+            skip_p: 'P 站[镜像]',
+        }
     },
     /* Being Developed */
     being_developed: {
@@ -123,9 +141,11 @@ export const m = {
     },
     /* Language */
     Language: {
-        name: '语言',
+        name: '国际化',
         chinese: '中文',
-        english: '英文'
+        loading_force: '装逼',
+        english: '英文',
+        japanese: '日语'
     },
     /* Introduction To Creator */
     i_t_c: {

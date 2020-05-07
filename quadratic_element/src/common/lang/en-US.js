@@ -100,19 +100,31 @@ export const m = {
             sms: 'Mobile short message(SMS)'
         }
     },
-    /* 二次元 */
-    q_e: {
-        name: 'Quadratic Element',
-        a: 'AcFun',
-        b: 'bilibili',
-        c: 'CosZ',
-        d: 'dilidili',
-        e: 'E-hantai',
-        f: 'FAKKU',
-        g: 'Gelbooru',
-        m: 'MissEvan',
-        k: 'KonaChan',
-        p: 'Pzhan'
+    /* 导航 */
+    navigation: {
+        /* 在线观看番剧 */
+        online_watching_bangumi: {
+            name: 'online watching bangumi'
+        },
+        /* 在线观看漫画 */
+        online_watching_caricature: {
+            name: 'online watching caricature'
+        },
+        /* 二次元 */
+        q_e: {
+            name: 'Quadratic Element',
+            a: 'AcFun',
+            b: 'bilibili',
+            c: 'CosZ',
+            d: 'dilidili',
+            e: 'E-hantai',
+            f: 'FAKKU',
+            g: 'Gelbooru',
+            m: 'MissEvan',
+            k: 'KonaChan',
+            p: 'Pzhan[Need Virtual Private Network]',
+            skip_p: 'Pixiv[mirroring]',
+        }
     },
     /* 开发中 */
     being_developed: {
@@ -120,9 +132,11 @@ export const m = {
     },
     /* 语言 */
     Language: {
-        name: 'Language',
+        name: 'internationalization',
         chinese: 'Chinese',
-        english: 'English'
+        loading_force: 'Loading force',
+        english: 'English',
+        japanese: 'japanese'
     },
     /* 创作者 */
     i_t_c: {

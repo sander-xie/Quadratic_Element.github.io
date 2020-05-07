@@ -34,7 +34,7 @@
                 </el-select>
             </el-col>
             <el-col :span="5">
-                <font color="#909399" v-if="true">程序员正在加急开发中!</font>
+                <font color="#909399" v-if="true">{{$t('m.being_developed.name')}}</font>
                 <i class="el-icon-loading"></i>
             </el-col>
             <el-col :span="6"><el-input v-model="search_value" :placeholder="search_hint_placeholder"></el-input></el-col>
@@ -100,7 +100,7 @@
                     <font v-if="!setting_popup_frame_form.resolution_ratio_hint_reveal">隐藏</font>
                 </el-checkbox>
             </el-form-item>
-            <el-form-item label="老婆提示文字是否显示" :label-width="formLabelWidth">
+            <el-form-item label="老婆提示文字是否显示ㅤㅤ" :label-width="formLabelWidth">
                 <el-checkbox v-model="setting_popup_frame_form.figure_hint_reveal" border>
                     <font v-if="setting_popup_frame_form.figure_hint_reveal">显示</font>
                     <font v-if="!setting_popup_frame_form.figure_hint_reveal">隐藏</font>
