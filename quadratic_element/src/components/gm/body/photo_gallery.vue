@@ -8,9 +8,9 @@
     <el-row style="line-height: 0px;">
         <el-col :span="4">
             <!-- <div class="grid-content bg-purple"></div> -->
-            <el-card :body-style="{padding: '0px',height: '100%' }" @click="download()" shadow="hover">
+            <el-card :body-style="{padding: '0px',height: '100%' }" shadow="hover">
                 <!-- <el-image fit="none" style="width: 100px; height: 100px" src="https://konachan.net/data/preview/d2/45/d2459502e99b6f779bec9b7719e9be7d.jpg"></el-image> -->
-                <picture_presentation :picture="picture" />
+                <picture_presentation :picture="picture" :message_alert_parameter="message_alert_parameter" />
             </el-card>
         </el-col>
         <!-- <el-col :span="4" :offset="1">
@@ -49,6 +49,7 @@ export default {
     data() {
         return {
             pictures_src: 'aaa',
+            /* 图片信息 */
             picture: {
                 id:'1', /* 图片ID */
                 /* 图片名称 */
@@ -106,7 +107,33 @@ export default {
                     /* 图片来源链接 */
                     source_link: 'https://konachan.net/sample/b07496edaf042e99b90bb0f77fc1c3ef/Konachan.com%20-%20305360%20sample.jpg?0.26283345924835855'
                 }
-            }
+            },
+            /* 消息弹窗 */
+            message_alert_parameter: {
+                duration: {
+                    zero_ms: '0',
+                    one_ms: '1000',
+                    two_ms: '2000',
+                    three_ms: '3000',
+                    four_ms: '4000',
+                    five_ms: '5000',
+                    six_ms: '6000',
+                    seven_ms: '7000',
+                    eight_ms: '8000',
+                    nine_ms: '9000',
+                    ten_ms: '10000'
+                },
+                showClose: {
+                    t: 'true',
+                    f: 'false'
+                },
+                type: {
+                    s: 'success',
+                    w: 'warning',
+                    i: 'info',
+                    e: 'error'
+                }
+            },
         };
     },
     build: {

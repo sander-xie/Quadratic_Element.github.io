@@ -7,7 +7,9 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import VueI18n from 'vue-i18n'
 import VueClipboard from 'vue-clipboard2'
+import axios from 'axios';
 
+Vue.prototype.$axios = axios;
 Vue.use(VueClipboard)
 Vue.use(VueI18n)
 
