@@ -7,14 +7,20 @@
         <left_aside />
       <!-- </el-aside> -->
       <el-container>
-        <el-header><input_field /></el-header>
+        <el-header height="60px"><input_field /></el-header>
+        <!-- min-height: calc(100vh - 121px) -->
         <el-main> 
           <!-- <middle-iframe />  -->
           <photo_gallery /> 
         </el-main>
-        <el-footer height="10%"> <bottom /> </el-footer>
+        <!-- style="margin-bottom: -130px" -->
+        <el-footer height="60px" style="margin-bottom: -30px">
+          <bottom />
+        </el-footer>
       </el-container>
     </el-container>
+    <!-- .page-component__scroll .el-scrollbar__wrap -->
+    <el-backtop target=".homBox"></el-backtop>
   </div>
 </template>
 
@@ -42,6 +48,11 @@ export default {
 </script>
 
 <style>
+  /* 隐藏滚动条 */
+  ::-webkit-scrollbar {
+    height: 0;
+    width: 0 !important;
+  }
 body {
   margin: 0;
 }
@@ -52,7 +63,8 @@ body,
 .el-container {
   padding: 0;
   margin: 0;
-  height: 2000px;
+  background-color: Transparent;
+  height: 130%;
 }
 .el-container > .el-header {
   background-color: rgb(255, 255, 255);
@@ -61,6 +73,7 @@ body,
   background-color: rgb(69, 139, 209);
 }
 .el-container > .el-footer {
-  background-color: rgb(84, 92, 100);
+  /* background-color: rgb(84, 92, 100); */
+  background-color: Transparent;
 }
 </style>

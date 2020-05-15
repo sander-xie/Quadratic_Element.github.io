@@ -1,7 +1,7 @@
 <template>
-    <div class="demo-image__preview" style="width: 100%; height: 100%" >
-        <el-image style="width: 100%; height: 100%" :src="pictures.path" :href="pictures.wallpaper_link">
-            <div slot="error" style="width: 100%; height: 100%" class="image-slot">
+    <div class="demo-image__preview" style="width: 100%; height: 100%;">
+        <el-image style="width: 100%;height: 155px;" :src="pictures.path" :href="pictures.wallpaper_link">
+            <div slot="error" style="" class="image-slot">
                 <i class="el-icon-picture-outline">{{pictures.picture_outline_error}}</i>
             </div>
         </el-image>
@@ -38,131 +38,126 @@
             </el-row>
         </div>
 
-        <!-- 鼠标滚轮禁用 @mousewheel.prevent -->
-        <el-dialog :title="pictures.image_name" top="25px" :visible.sync="Preview_DialogVisible" width="96%" center :fullscreen="false" :before-close-close="false" @open="stopSrcoll()" @close="openSrcoll()" destroy-on-close>
-            <el-image fit="scale-down" style="margin-left: 23%;width: 53%" :src="pictures.total_graph_link">
-                <div slot="error" style="width: 100%; height: 100%" class="image-slot">
-                    <i class="el-icon-picture-outline">{{pictures.picture_outline_error}}</i>
-                </div>
-            </el-image>
-            <span slot="footer" class="dialog-footer">
-                <el-button @click="Preview_DialogVisible = false">取 消</el-button>
-                <el-button type="primary" @click="Preview_DialogVisible = false">确 定</el-button>
-            </span>
+        <!-- 鼠标滚轮禁用 @mousewheel.prevent :title="pictures.image_name" -->
+        <el-dialog  top="25px" :visible.sync="Preview_DialogVisible" width="96%" center :fullscreen="false" :before-close-close="false" @open="stopSrcoll()" @close="openSrcoll()" :show-close="false" destroy-on-close>
+            <el-row>
+                <el-col :span="18" style="background-color: #EBEEF5">
+                    <!-- style="height: 576px;background-color: #F2F6FC;" -->
+                    <el-image fit="scale-down" style="height: 643px;background-color: #F2F6FC;" :src="pictures.total_graph_link">
+                        <div slot="error" style="width: 100%; height: 100%" class="image-slot">
+                            <i class="el-icon-picture-outline">
+                                {{pictures.picture_outline_error}}
+                            </i>
+                        </div>
+                    </el-image>
+                </el-col>
+                <el-col :span="5" :offset="1" style="background-color: #EBEEF5">
+                    hhh
+                </el-col>
+            </el-row>
         </el-dialog>
 
-        <!-- :title="pictures.detailed_information.title" -->
-        <el-dialog :title="pictures.detailed_information.title" :style="{backgroundRepeat: 'no-repeat',backgroundImage:'url('+pictures.detailed_information_backdrop+')'}" style="background-size: 100% 100%;opacity: 0.66;" top="40px" :visible.sync="detailed_information_DialogVisible" width="48%" center :fullscreen="false" :show-close="false" destroy-on-close>
+        <!-- :style="{backgroundRepeat: 'no-repeat', backgroundImage:'url('+pictures.detailed_information_backdrop+')'}" style="background-size: 100% 100%;opacity: 0.66;" -->
+        <el-dialog :title="pictures.detailed_information.title" top="40px" :visible.sync="detailed_information_DialogVisible" width="50%" center :fullscreen="false" :show-close="false" destroy-on-close>
             <!-- 设置弹窗背景 http://localhost:8884/static/Image_resources/wallpaper/505306.jpg -->
             <div class="index">
-                <div class="pull-height animated" :style="{backgroundRepeat: 'no-repeat',backgroundImage:'url('+pictures.total_graph_link+')'}" style="background-size: 100% 100%;opacity: 0.88;">
-                    <el-row :gutter="detailed_information_gutter">
-                    </el-row>
-                    <el-row :gutter="detailed_information_gutter">
-                    </el-row>
-                    <el-row :gutter="detailed_information_gutter">
-                        <el-col :span="detailed_information_title.span" :offset="detailed_information_title.offset">
-                                <font class="el-row_el-col_font_title">全 名</font>
-                        </el-col>
-                    </el-row>
-                    <el-row :gutter="detailed_information_gutter">
-                        <el-col :span="detailed_information_content.span" :offset="detailed_information_content.offset">
-                            <el-link type="primary" target="_blank" :underline="false" :href="pictures.detailed_information.figure_baidu_link">
-                                <font class="el-row_el-col_font_content" v-text="picture.detailed_information.full_name"></font>
-                            </el-link>
-                        </el-col>
-                    </el-row>
-                    <el-row :gutter="detailed_information_gutter">
-                    </el-row>
-                    <el-row :gutter="detailed_information_gutter">
-                        <el-col :span="detailed_information_title.span" :offset="detailed_information_title.offset">
-                            <font class="el-row_el-col_font_title">昵 称</font>
-                        </el-col>
-                    </el-row>
-                    <el-row :gutter="detailed_information_gutter">
-                        <el-col :span="detailed_information_content.span" :offset="detailed_information_content.offset">
-                            <font class="el-row_el-col_font_content" v-text="picture.detailed_information.nick_name"></font>
-                        </el-col>
-                    </el-row>
-                    <el-row :gutter="detailed_information_gutter">
-                    </el-row>
-                    <el-row :gutter="detailed_information_gutter">
-                        <el-col :span="detailed_information_title.span" :offset="detailed_information_title.offset">
-                            <font class="el-row_el-col_font_title">爱 称</font>
-                        </el-col>
-                    </el-row>
-                    <el-row :gutter="detailed_information_gutter">
-                        <el-col :span="detailed_information_content.span" :offset="detailed_information_content.offset">
-                            <font class="el-row_el-col_font_content" v-text="picture.detailed_information.pet_name"></font>
-                        </el-col>
-                    </el-row>
-                    <el-row :gutter="detailed_information_gutter">
-                    </el-row>
-                    <el-row :gutter="detailed_information_gutter">
-                        <el-col :span="detailed_information_title.span" :offset="detailed_information_title.offset">
-                            <font class="el-row_el-col_font_title">番剧名称</font>
-                        </el-col>
-                    </el-row>
-                    <el-row :gutter="detailed_information_gutter">
-                        <el-col :span="detailed_information_content.span" :offset="detailed_information_content.offset">
-                            <el-link type="primary" target="_blank" :underline="false" :href="pictures.detailed_information.bangumi_baidu_link">
-                                <font class="el-row_el-col_font_content" v-text="picture.detailed_information.bangumi"></font>
-                            </el-link>
-                        </el-col>
-                    </el-row>
-                    <el-row :gutter="detailed_information_gutter">
-                    </el-row>
-                    <el-row :gutter="detailed_information_gutter">
-                        <el-col :span="detailed_information_title.span" :offset="detailed_information_title.offset">
-                            <font class="el-row_el-col_font_title">图片贡献人</font>
-                        </el-col>
-                    </el-row>
-                    <el-row :gutter="detailed_information_gutter">
-                        <el-col :span="detailed_information_content.span" :offset="detailed_information_content.offset">
-                            <el-link type="primary" target="_blank" :underline="false" :href="pictures.detailed_information.provide_people_link">
-                                <font class="el-row_el-col_font_content" v-text="picture.detailed_information.provide_people"></font>
-                            </el-link>
-                        </el-col>
-                    </el-row>
-                    <el-row :gutter="detailed_information_gutter">
-                    </el-row>
-                    <el-row :gutter="detailed_information_gutter">
-                        <el-col :span="detailed_information_title.span" :offset="detailed_information_title.offset">
-                            <font class="el-row_el-col_font_title">图片贡献方式</font>
-                        </el-col>
-                    </el-row>
-                    <el-row :gutter="detailed_information_gutter">
-                        <el-col :span="detailed_information_content.span" :offset="detailed_information_content.offset">
-                            <el-link type="primary" target="_blank" :underline="false" :href="pictures.detailed_information.ways_of_supply_link">
-                                <font class="el-row_el-col_font_content" v-text="picture.detailed_information.ways_of_supply"></font>
-                            </el-link>
-                        </el-col>
-                    </el-row>
-                    <el-row :gutter="detailed_information_gutter">
-                    </el-row>
-                    <el-row :gutter="detailed_information_gutter">
-                        <el-col :span="detailed_information_title.span" :offset="detailed_information_title.offset">
-                            <font class="el-row_el-col_font_title">图片来源</font>
-                        </el-col>
-                    </el-row>
-                    <el-row :gutter="detailed_information_gutter">
-                        <el-col :span="detailed_information_content.span" :offset="detailed_information_content.offset">
-                            <el-link type="primary" target="_blank" :underline="false" :href="pictures.detailed_information.source_link">
-                                <font class="el-row_el-col_font_content" v-text="picture.detailed_information.source"></font>
-                                <!-- <font class="el-row_el-col_font_content" v-text="picture.detailed_information.source_link"></font> -->
-                            </el-link>
-                        </el-col>
-                    </el-row>
-                    <el-row :gutter="detailed_information_gutter">
-                    </el-row>
-                    <el-row :gutter="detailed_information_gutter">
-                    </el-row>
+                <div class="pull-height animated" :style="{backgroundRepeat: 'no-repeat',backgroundImage:'url('+pictures.total_graph_link+')'}" style="background-size: 100% 100%;opacity: 0.88;border:1px solid pink;">
+                    <!-- <div style="background-size: 100% 100%;opacity: 0.99;"> -->
+                        <el-row :gutter="detailed_information_gutter"></el-row>
+                        <el-row :gutter="detailed_information_gutter"></el-row>
+                        <el-row :gutter="detailed_information_gutter">
+                            <el-col :span="detailed_information_title.span" :offset="detailed_information_title.offset">
+                                    <font class="el-row_el-col_font_title">全 名</font>
+                            </el-col>
+                        </el-row>
+                        <el-row :gutter="detailed_information_gutter">
+                            <el-col :span="detailed_information_content.span" :offset="detailed_information_content.offset">
+                                <el-link type="primary" target="_blank" :underline="false" :href="pictures.detailed_information.figure_baidu_link">
+                                    <font class="el-row_el-col_font_content" v-text="picture.detailed_information.full_name"></font>
+                                </el-link>
+                            </el-col>
+                        </el-row>
+                        <el-row :gutter="detailed_information_gutter"></el-row>
+                        <el-row :gutter="detailed_information_gutter">
+                            <el-col :span="detailed_information_title.span" :offset="detailed_information_title.offset">
+                                <font class="el-row_el-col_font_title">昵 称</font>
+                            </el-col>
+                        </el-row>
+                        <el-row :gutter="detailed_information_gutter">
+                            <el-col :span="detailed_information_content.span" :offset="detailed_information_content.offset">
+                                <font class="el-row_el-col_font_content" v-text="picture.detailed_information.nick_name"></font>
+                            </el-col>
+                        </el-row>
+                        <el-row :gutter="detailed_information_gutter"></el-row>
+                        <el-row :gutter="detailed_information_gutter">
+                            <el-col :span="detailed_information_title.span" :offset="detailed_information_title.offset">
+                                <font class="el-row_el-col_font_title">爱 称</font>
+                            </el-col>
+                        </el-row>
+                        <el-row :gutter="detailed_information_gutter">
+                            <el-col :span="detailed_information_content.span" :offset="detailed_information_content.offset">
+                                <font class="el-row_el-col_font_content" v-text="picture.detailed_information.pet_name"></font>
+                            </el-col>
+                        </el-row>
+                        <el-row :gutter="detailed_information_gutter"></el-row>
+                        <el-row :gutter="detailed_information_gutter">
+                            <el-col :span="detailed_information_title.span" :offset="detailed_information_title.offset">
+                                <font class="el-row_el-col_font_title">番剧|游戏名称</font>
+                            </el-col>
+                        </el-row>
+                        <el-row :gutter="detailed_information_gutter">
+                            <el-col :span="detailed_information_content.span" :offset="detailed_information_content.offset">
+                                <el-link type="primary" target="_blank" :underline="false" :href="pictures.detailed_information.bangumi_baidu_link">
+                                    <font class="el-row_el-col_font_content" v-text="picture.detailed_information.bangumi"></font>
+                                </el-link>
+                            </el-col>
+                        </el-row>
+                        <el-row :gutter="detailed_information_gutter"></el-row>
+                        <el-row :gutter="detailed_information_gutter"></el-row>
+                        <el-row :gutter="detailed_information_gutter">
+                            <el-col :span="detailed_information_title.span" :offset="detailed_information_title.offset">
+                                <font class="el-row_el-col_font_title">图片贡献人</font>
+                            </el-col>
+                        </el-row>
+                        <el-row :gutter="detailed_information_gutter">
+                            <el-col :span="detailed_information_content.span" :offset="detailed_information_content.offset">
+                                <el-link type="primary" target="_blank" :underline="false" :href="pictures.detailed_information.provide_people_link">
+                                    <font class="el-row_el-col_font_content" v-text="picture.detailed_information.provide_people"></font>
+                                </el-link>
+                            </el-col>
+                        </el-row>
+                        <el-row :gutter="detailed_information_gutter"></el-row>
+                        <el-row :gutter="detailed_information_gutter">
+                            <el-col :span="detailed_information_title.span" :offset="detailed_information_title.offset">
+                                <font class="el-row_el-col_font_title">图片贡献方式</font>
+                            </el-col>
+                        </el-row>
+                        <el-row :gutter="detailed_information_gutter">
+                            <el-col :span="detailed_information_content.span" :offset="detailed_information_content.offset">
+                                <el-link type="primary" target="_blank" :underline="false" :href="pictures.detailed_information.ways_of_supply_link">
+                                    <font class="el-row_el-col_font_content" v-text="picture.detailed_information.ways_of_supply"></font>
+                                </el-link>
+                            </el-col>
+                        </el-row>
+                        <el-row :gutter="detailed_information_gutter"></el-row>
+                        <el-row :gutter="detailed_information_gutter">
+                            <el-col :span="detailed_information_title.span" :offset="detailed_information_title.offset">
+                                <font class="el-row_el-col_font_title">图片来源</font>
+                            </el-col>
+                        </el-row>
+                        <el-row :gutter="detailed_information_gutter">
+                            <el-col :span="detailed_information_content.span" :offset="detailed_information_content.offset">
+                                <el-link type="primary" target="_blank" :underline="false" :href="pictures.detailed_information.source_link">
+                                    <font class="el-row_el-col_font_content" v-text="picture.detailed_information.source"></font>
+                                    <!-- <font class="el-row_el-col_font_content" v-text="picture.detailed_information.source_link"></font> -->
+                                </el-link>
+                            </el-col>
+                        </el-row>
+                        <el-row :gutter="detailed_information_gutter"></el-row>
+                        <el-row :gutter="detailed_information_gutter"></el-row>
+                    <!-- </div> -->
                 </div>
             </div>
-            <span slot="footer" class="dialog-footer">
-                <!-- <el-button @click="detailed_information_DialogVisible = false">取 消</el-button> -->
-                <!-- <el-button type="primary" @click="detailed_information_DialogVisible = false">确 定</el-button> -->
-            </span>
         </el-dialog>
 
     </div>
@@ -254,7 +249,7 @@ export default {
         onCopy (e) {
             this.message_alert_param.duration = this.message_alert_parameters.duration.two_ms;
             this.message_alert_param.showClose = this.message_alert_parameters.showClose.t;
-            this.message_alert_param.msg = this.pictures.message_alert_parameters.full_name + "分享链接已复制到剪切板！";
+            this.message_alert_param.msg = this.pictures.detailed_information.full_name + "分享链接已复制到剪切板！";
             this.message_alert_param.type = this.message_alert_parameters.type.s;
             this.message_alert()
         },
@@ -262,7 +257,7 @@ export default {
         onError (e) {
             this.message_alert_param.duration = this.message_alert_parameters.duration.two_ms;
             this.message_alert_param.showClose = this.message_alert_parameters.showClose.t;
-            this.message_alert_param.msg = this.message_alert_parameters.showClose.t + "抱歉，复制失败！";
+            this.message_alert_param.msg = "抱歉啦，复制失败！";
             this.message_alert_param.type = this.message_alert_parameters.type.e;
             this.message_alert();
         },
@@ -292,13 +287,18 @@ export default {
 }
 .el-row_el-col_font_title {
     color: black;
+    background-color: #FFFFFF;
     font-size: 19px;
     font-weight: bold;
+    border:1px solid #3bb4f2;
 }
 .el-row_el-col_font_content {
+    /* color: #303133; */
     color: black;
+    background-color: white;
     font-size: 18px;
     font-weight: bold;
+    border:1px solid #3bb4f2;
 }
 /* .index {
     filter:alpha(Opacity=65);

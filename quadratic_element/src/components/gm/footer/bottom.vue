@@ -7,47 +7,54 @@
 
   <div class="bottom">
     <el-row>
-      <el-col :span="12">
+      <el-col :span="10" :offset="1">
         <!-- text-inside="true" -->
-        <el-button type="text" @click="dialogVisible = true">项目信息</el-button>
-      </el-col>
-      <el-col :span="2">
-        <el-link href="http://yunluo.xyz" target="_blank" type="info">作者首页</el-link>
-      </el-col>
-      <el-col :span="24">
         <div class="transition-box">Copyright xietao</div>
       </el-col>
+      <!-- <el-col :span="2">
+        <el-link href="http://yunluo.xyz" target="_blank" type="info">作者首页</el-link>
+      </el-col> -->
+      <el-col :span="10" :offset="1">
+        <el-button type="text" @click="project_dialogVisible = true">项目信息</el-button>
+      </el-col>
     </el-row>
-    <el-dialog title="项目信息"
-      :visible.sync="dialogVisible"
-      :before-close="handleClose">
+
+    <el-dialog title="项目信息" :visible.sync="project_dialogVisible" top="50px" :before-close="handleClose" destroy-on-close>
       <el-row>
         <el-col :span="6">项目名称：</el-col>
-        <el-col :span="18"><font class="xmxx-font-color">二次元壁纸分享ㅤ|ㅤquadratic_element</font></el-col>
+        <el-col :span="18"><font class="xmxx-font-color">{{project_detailed.name}}</font></el-col>
       </el-row>
       <el-row>
         <el-col :span="6">版本信息：</el-col>
         <el-col :offset="18"></el-col>
-        <el-col :span="12">当前状态：<font class="xmxx-font-color">内部开发中</font></el-col>
-        <el-col :span="12">版本号：<font class="xmxx-font-color">0.0.0.1</font></el-col>
+        <el-col :span="12">当前状态：<font class="xmxx-font-color">{{project_detailed.version.state}}</font></el-col>
+        <el-col :span="12">版本号：<font class="xmxx-font-color">{{project_detailed.version.build_no}}</font></el-col>
       </el-row>
       <el-row>
         <el-col :span="6">
           <font>项目进度：</font>
         </el-col>
         <el-col :offset="4" :span="20">
-          <el-progress :percentage="1"></el-progress>
+          <el-progress :percentage="project_detailed.rate_of_progress"></el-progress>
         </el-col>
       </el-row>
       <el-row>
         <el-col :span="24">
           <font>您对我的评价：</font>
-          <div class="transition-box"><el-rate v-model="value" show-text></el-rate></div>
+          <el-popconfirm
+            confirmButtonText='是的'
+            :onConfirm="estimate(true)"
+            cancelButtonText='让我在想想'
+            icon="el-icon-info"
+            iconColor="#f90"
+            title="确定提交吗？">
+          </el-popconfirm>
+          <div class="transition-box" @click="estimate()"><el-rate v-model="project_detailed.evaluate" show-text></el-rate></div>
         </el-col>
       </el-row>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+        <el-button @click="project_dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="project_dialogVisible = false">确 定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -59,11 +66,41 @@ export default {
     name: "bottom",
     data() {
       return {
-        dialogVisible: false,
-        value: null
+        /* 项目详细信息展示 */
+        project_dialogVisible: false,
+        /* 项目详细信息 */
+        project_detailed: {
+          name: '二次元壁纸分享ㅤ|ㅤquadratic_element',
+          /* 版本信息 */
+          version: {
+            state: '内部开发中',
+            build_no: '0.0.0.1'
+          },
+          /* 项目进度 */
+          rate_of_progress: 1,
+          /* 用户体验评价 */
+          evaluate: null
+        },
       };
     },
     methods: {
+      estimate_verdict (evaluate) {
+        switch(evaluate){
+          case 1: console.log('呜呜呜？');break;
+          case 2: console.log('这么少？');break;
+          case 3: console.log('理由呢？');break;
+          case 4: console.log('为啥不是满分？');break;
+          case 5: console.log('这就对了嘛？');break;
+          default: console.log('666 居然点出BUG了！');;break;
+        }
+      },
+      estimate: function (bool) {
+        if(bool){
+          this.estimate_verdict(this.project_detailed.evaluate);
+        }else{
+          console.log('大哥，快点给我个满分啦！');
+        }
+      },
       handleClose(done) {
         this.$confirm('确认关闭？')
           .then(_ => {

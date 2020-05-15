@@ -122,6 +122,7 @@ export const m = {
         /* 二次元 Quadratic Element */
         q_e: {
             name: '二次元',
+            3: '3 站',
             a: 'A 站',
             b: 'B 站',
             c: 'C 站',
@@ -129,8 +130,9 @@ export const m = {
             e: 'E 站',
             f: 'F 站',
             g: 'G 站',
-            m: 'M 站',
             k: 'K 站',
+            l: 'l 站',
+            m: 'M 站',
             p: 'P 站[需vpn]',
             skip_p: 'P 站[镜像]',
         }
