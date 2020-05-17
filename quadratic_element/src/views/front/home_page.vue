@@ -3,17 +3,12 @@
     <!-- <span v-text="$t('m.music')"></span> -->
     <!-- <span>{{$t('m.man')}}</span> -->
     <el-container>
-      <!-- <el-aside> -->
         <left_aside />
-      <!-- </el-aside> -->
       <el-container>
         <el-header height="60px"><input_field /></el-header>
-        <!-- min-height: calc(100vh - 121px) -->
         <el-main> 
-          <!-- <middle-iframe />  -->
           <photo_gallery /> 
         </el-main>
-        <!-- style="margin-bottom: -130px" -->
         <el-footer height="60px" style="margin-bottom: -30px">
           <bottom />
         </el-footer>

@@ -8,6 +8,10 @@ import 'element-ui/lib/theme-chalk/index.css'
 import VueI18n from 'vue-i18n'
 import VueClipboard from 'vue-clipboard2'
 import axios from 'axios';
+import { HappyScroll } from 'vue-happy-scroll'
+import 'vue-happy-scroll/docs/happy-scroll.css'
+
+Vue.component('happy-scroll', HappyScroll)
 
 Vue.prototype.$axios = axios;
 Vue.use(VueClipboard)

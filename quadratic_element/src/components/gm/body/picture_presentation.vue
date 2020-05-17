@@ -26,9 +26,7 @@
                     </el-link>
                 </el-col>
                 <el-col :span="3" :offset="1">
-                    <el-link type="primary" target="_blank" :underline="false" style="margin-top: 8px;" @click="Preview_DialogVisible=true;">
-                        <i class="el-icon-view"></i>
-                    </el-link>
+                    <picture_preview :pictures="pictures" />
                 </el-col>
                 <el-col :span="3" :offset="1">
                     <el-link type="primary" target="_blank" :underline="false" style="margin-top: 8px;" @click="detailed_information_DialogVisible=true;">
@@ -37,25 +35,6 @@
                 </el-col>
             </el-row>
         </div>
-
-        <!-- 鼠标滚轮禁用 @mousewheel.prevent :title="pictures.image_name" -->
-        <el-dialog  top="25px" :visible.sync="Preview_DialogVisible" width="96%" center :fullscreen="false" :before-close-close="false" @open="stopSrcoll()" @close="openSrcoll()" :show-close="false" destroy-on-close>
-            <el-row>
-                <el-col :span="18" style="background-color: #EBEEF5">
-                    <!-- style="height: 576px;background-color: #F2F6FC;" -->
-                    <el-image fit="scale-down" style="height: 643px;background-color: #F2F6FC;" :src="pictures.total_graph_link">
-                        <div slot="error" style="width: 100%; height: 100%" class="image-slot">
-                            <i class="el-icon-picture-outline">
-                                {{pictures.picture_outline_error}}
-                            </i>
-                        </div>
-                    </el-image>
-                </el-col>
-                <el-col :span="5" :offset="1" style="background-color: #EBEEF5">
-                    hhh
-                </el-col>
-            </el-row>
-        </el-dialog>
 
         <!-- :style="{backgroundRepeat: 'no-repeat', backgroundImage:'url('+pictures.detailed_information_backdrop+')'}" style="background-size: 100% 100%;opacity: 0.66;" -->
         <el-dialog :title="pictures.detailed_information.title" top="40px" :visible.sync="detailed_information_DialogVisible" width="50%" center :fullscreen="false" :show-close="false" destroy-on-close>
@@ -159,7 +138,6 @@
                 </div>
             </div>
         </el-dialog>
-
     </div>
 </template>
 
@@ -176,7 +154,9 @@ export default {
             /* 每一个 <el-col></el-col> 的间隔 */
             detailed_information_gutter: 0,
             detailed_information_DialogVisible: false,
-            Preview_DialogVisible: false,
+            /* 预览图片 */
+            // preview_dialogvisible: false,
+            /* 图片信息 */
             pictures: this.picture,
             message_alert_parameters: this.message_alert_parameter,
             message_alert_param: {
@@ -273,6 +253,10 @@ export default {
                 type: this.message_alert_param.type
             });
         }
+    },
+    /* 懒加载组件 */
+    components:{
+        picture_preview: resolve => require(["@/components/gm/body/picture_preview.vue"], resolve)
     },
     /* 获取父组件传出值 */
     props:['picture','message_alert_parameter'],
