@@ -8,9 +8,15 @@
                     :key="item.value"
                     :label="item.Character_Name"
                     :value="item.another_name">
-                        <el-tooltip :disabled="figure_hint_reveal" :content="item.presentation" class="item" effect="light" placement="right-end">
+                        <el-tooltip :disabled="figure_hint_reveal" content="测试" class="item" effect="light" placement="right-end">
                             <div>
                                 <span style="float: left">{{ item.Character_Name }}</span>
+                                <!-- <span style="float: right; color: #8492a6; font-size: 13px">{{ item.another_name }}</span> -->
+                            </div>
+                        </el-tooltip>
+                        <el-tooltip :disabled="figure_hint_reveal" :content="item.presentation" class="item" effect="light" placement="right-end">
+                            <div>
+                                <!-- <span style="float: left">{{ item.Character_Name }}</span> -->
                                 <span style="float: right; color: #8492a6; font-size: 13px">{{ item.another_name }}</span>
                             </div>
                         </el-tooltip>
@@ -24,9 +30,15 @@
                     :key="item.value"
                     :label="item.format"
                     :value="item.size">
-                        <el-tooltip :disabled="resolution_ratio_hint_reveal" :content="resolution_ratio_hint_content" class="item" effect="light" placement="right-end">
+                    <el-tooltip :disabled="resolution_ratio_hint_reveal" content="resolution_ratio_hint_content" class="item" effect="light" placement="right-end">
                             <div>
                                 <span style="float: left">{{ item.format }}</span>
+                                <!-- <span style="float: right; color: #8492a6; font-size: 13px">{{ item.size }}</span> -->
+                            </div>
+                        </el-tooltip>
+                        <el-tooltip :disabled="resolution_ratio_hint_reveal" :content="resolution_ratio_hint_content" class="item" effect="light" placement="right-end">
+                            <div>
+                                <!-- <span style="float: left">{{ item.format }}</span> -->
                                 <span style="float: right; color: #8492a6; font-size: 13px">{{ item.size }}</span>
                             </div>
                         </el-tooltip>
